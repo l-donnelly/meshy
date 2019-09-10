@@ -165,3 +165,5 @@ var ChevronBufferGeometry = (function() {
   return ChevronBufferGeometry;
 
 })();
+
+//export { ChevronBufferGeometry }

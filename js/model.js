@@ -1,3 +1,4 @@
+//import { Calculate } from './calculate.js'
 /* model.js
    classes:
     Model
@@ -44,16 +45,19 @@ function Model(geometry, scene, camera, container, printout) {
 
   // base mesh
   this.baseMesh = null;
-  geometry.mergeVertices();
-  // fixes merge issue
-  geometry.faceVertexUvs = [new Array(0)];
+  if(geometry && geometry.type != 'BufferGeometry')
+  {
+	  geometry.mergeVertices();
+	  // fixes merge issue
+	  // geometry.faceVertexUvs = [new Array(0)];
+  }
   this.makeBaseMesh(geometry);
 
   // setup: clear colors, make bounding box, shift geometry to the mesh's
   // origin, set mode, and compute various quantities
-  this.resetFaceColors();
-  this.resetVertexColors();
-  this.resetGeometryColors();
+  //this.resetFaceColors();
+  //this.resetVertexColors();
+  //this.resetGeometryColors();
   this.computeBoundingBox();
   this.shiftBaseGeometryToOrigin();
   this.setMode("base");
@@ -539,9 +543,12 @@ Model.prototype.positionCenterOfMassIndicator = function() {
 Model.prototype.setMode = function(mode, params) {
   this.mode = mode;
   // remove any current meshes in the scene
-  removeMeshByName(this.scene, "base");
-  removeMeshByName(this.scene, "support");
-  removeMeshByName(this.scene, "slice");
+  //removeMeshByName(this.scene, "base");
+  //removeMeshByName(this.scene, "support");
+  //removeMeshByName(this.scene, "slice");
+  this.scene.remove(this.scene.getObjectByName("base"));
+  this.scene.remove(this.scene.getObjectByName("support"));
+  this.scene.remove(this.scene.getObjectByName("slice"));
 
   // base mode - display the normal, plain mesh
   if (mode == "base") {
@@ -586,7 +593,8 @@ Model.prototype.makeSupportMesh = function() {
 Model.prototype.addSliceMeshesToScene = function() {
   if (!this.slicer) return;
 
-  removeMeshByName(this.scene, "slice");
+  //removeMeshByName(this.scene, "slice");
+  this.scene.remove(this.scene.getObjectByName("slice"));
 
   // add meshes for current layer contours and infill, unless mode is full and
   // showing all layers at once
@@ -826,7 +834,8 @@ Model.prototype.removeSupports = function() {
 
   this.supportsGenerated = false;
   this.supportMesh = null;
-  removeMeshByName(this.scene, "support");
+  //removeMeshByName(this.scene, "support");
+  this.scene.remove(this.scene.getObjectByName("support"));
 }
 
 
@@ -906,9 +915,17 @@ Model.prototype.gcodeSave = function(params) {
 Model.prototype.dispose = function() {
   if (!this.scene) return;
 
-  removeMeshByName(this.scene, "base");
-  removeMeshByName(this.scene, "support");
-  removeMeshByName(this.scene, "slice");
-  removeMeshByName(this.scene, "wireframe");
-  removeMeshByName(this.scene, "centerOfMassIndicator");
+  //removeMeshByName(this.scene, "base");
+  //removeMeshByName(this.scene, "support");
+  //removeMeshByName(this.scene, "slice");
+  //removeMeshByName(this.scene, "wireframe");
+  //removeMeshByName(this.scene, "centerOfMassIndicator");
+
+  this.scene.remove(this.scene.getObjectByName("base"));
+  this.scene.remove(this.scene.getObjectByName("support"));
+  this.scene.remove(this.scene.getObjectByName("slice"));
+  this.scene.remove(this.scene.getObjectByName("wireframe"));
+  this.scene.remove(this.scene.getObjectByName("centerOfMassIndicator"));
 }
+
+//export { Model }

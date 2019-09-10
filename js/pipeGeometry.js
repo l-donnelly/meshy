@@ -181,3 +181,5 @@ var PipeBufferGeometry = (function() {
   return PipeBufferGeometry;
 
 })();
+
+//export { PipeBufferGeometry }

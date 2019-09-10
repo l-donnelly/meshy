@@ -160,3 +160,5 @@ EditStack.prototype = {
     this.pos = -1;
   }
 }
+
+//export { Transform }

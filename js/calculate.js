@@ -692,3 +692,5 @@ var Calculate = (function() {
   };
 
 })();
+
+//export { Calculate }

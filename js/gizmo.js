@@ -1,3 +1,6 @@
+//import { ChevronBufferGeometry } from './chevronGeometry.js'
+//import { PipeBufferGeometry } from './pipeGeometry'
+
 var Gizmo = (function() {
 
   function makeHandleName(axis, type) {
@@ -734,3 +737,5 @@ var Gizmo = (function() {
   return Gizmo;
 
 })();
+
+//export { Gizmo }

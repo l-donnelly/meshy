@@ -2275,3 +2275,5 @@ Meshy.prototype.cameraToModel = function() {
     r: this.model.getMaxSize() * 3 // factor of 3 empirically determined
   });
 }
+
+//export { meshy }
